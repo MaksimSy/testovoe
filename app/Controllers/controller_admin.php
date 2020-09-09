@@ -1,0 +1,30 @@
+<?php
+
+use App\Task;
+
+class Controller_Admin extends Controller
+{
+	
+	function action_index($id)
+	{
+		session_start();
+		if ( $_SESSION['admin'] == "123" )
+		{
+			$this->view->generate('admin_view.php', 'template_view.php');
+		}
+		else
+		{
+			session_destroy();
+			Route::ErrorPage404();
+		}
+
+	}
+
+	function action_logout()
+	{
+		session_start();
+		session_destroy();
+		header('Location:/');
+	}
+
+}
